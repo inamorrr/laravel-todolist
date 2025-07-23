@@ -31,6 +31,20 @@ jobs:
       - name: 🔑 Generate APP_KEY
         run: php artisan key:generate
 
+      # ⬇️ Tambahin bagian ini buat Node.js + Vite build
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install Node.js dependencies
+        run: npm install
+
+      - name: ⚙️ Build Vite/Mix assets
+        run: npm run build
+
+      # ⬆️ sampai sini bagian tambahan frontend build
+
       - name: 🛠️ Run migrations (optional, but good for test)
         run: php artisan migrate --force
         env:
